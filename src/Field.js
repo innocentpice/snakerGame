@@ -175,14 +175,14 @@ export class Field extends Component {
 		return snake;
 	};
 
-	running = (config = { delay: 1 }, callback: func) => {
+	running = (config = { delay: 2 }, callback: func) => {
 		setTimeout(() => {
 			let { snake, direction, gameStatus } = this.state;
 			if (gameStatus !== "start") return false;
 			if (direction !== "") snake = this.handlerSnakeMove(snake, direction);
 			this.setState({ snake, moved: true, gameRunning: true });
 			this.running();
-		}, config.delay * (450 + this.state.speed * -1));
+		}, Math.floor(config.delay * (33 + this.state.speed * -1)));
 	};
 
 	componentDidMount() {
@@ -209,6 +209,8 @@ export class Field extends Component {
 				}
 			}
 		});
+	}
+	componentWillMount() {
 		this.running();
 	}
 
